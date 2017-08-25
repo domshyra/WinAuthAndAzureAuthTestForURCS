@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b7c17a67b87c41589f888fec96e0e2bb" Name="Diagram1">
+        <EntityTypeShape EntityType="WinAuthAndAzureAuthTestForURCSModel.Project" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WinAuthAndAzureAuthTestForURCSModel.Role" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WinAuthAndAzureAuthTestForURCSModel.UserAccount" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WinAuthAndAzureAuthTestForURCSModel.UserProjectRole" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="WinAuthAndAzureAuthTestForURCSModel.FK_UserRoles_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="WinAuthAndAzureAuthTestForURCSModel.FK_UserRoles_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
