@@ -51,7 +51,7 @@
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Domshyra</p>
-            @{
+            @*@{
                 String[] users = @Roles.GetRolesForUser();
                 String usersList = "";
 
@@ -60,7 +60,7 @@
             {
                 usersList += user + ",";
             }
-            @Html.Hidden("UserRoles", usersList)
+            @Html.Hidden("UserRoles", usersList)*@
         </footer>
     </div>
 
@@ -69,9 +69,9 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
-<script>
+@*<script>
     $(document).ready(function () {
         var userRoles = $("#UserRoles").val();
         console.log(userRoles);
     });
-</script>
+</script>*@
