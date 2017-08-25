@@ -18,6 +18,7 @@ namespace WinAuthAndAzureAuthTestForURCS.Controllers
             if (Request.IsAuthenticated)
             {
                 //if I have user ID then I don't need to set session vars
+                //TODO: Figure out where to put this later
                 if (Session["userID"] == null)
                     URCSHelpers.setUserSession();
             }

@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Net;
-using System.Text.RegularExpressions;
 using WinAuthAndAzureAuthTestForURCS.Models;
+using System.Security.Claims;
 
 namespace WinAuthAndAzureAuthTestForURCS.Utils
 {
@@ -49,7 +48,7 @@ namespace WinAuthAndAzureAuthTestForURCS.Utils
             {
                 try
                 {
-                    var claimsPrincipalCurrent = System.Security.Claims.ClaimsPrincipal.Current;
+                    var claimsPrincipalCurrent = ClaimsPrincipal.Current;
                     var email = claimsPrincipalCurrent.FindFirst("preferred_username").Value;
                     try
                     {
@@ -82,6 +81,15 @@ namespace WinAuthAndAzureAuthTestForURCS.Utils
         public static string GetFirstAndLastNameForCurrentUser()
         {
             return HttpContext.Current.Session["firstName"] + " " + HttpContext.Current.Session["lastName"];
+        }
+
+        public void SetUserIdentityForOAuth(UserAccount user)
+        {
+
+            foreach (UserProjectRole projRole in user.UserProjectRoles)
+            {
+                //something something = projRole.Role.RoleName;
+            }
         }
     }
 }
