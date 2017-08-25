@@ -4,6 +4,7 @@ using System.Web;
 using System.Net;
 using WinAuthAndAzureAuthTestForURCS.Models;
 using System.Security.Claims;
+using System.Web.Security;
 
 namespace WinAuthAndAzureAuthTestForURCS.Utils
 {
@@ -53,6 +54,7 @@ namespace WinAuthAndAzureAuthTestForURCS.Utils
                     try
                     {
                         UserAccount user = db.UserAccounts.Where(u => u.Email == email).FirstOrDefault();
+                        AddCurrentUserToRoles(user);
                         HttpContext.Current.Session["username"] = user.UserName;
                         HttpContext.Current.Session["userID"] = user.UserAccountID;
                         HttpContext.Current.Session["firstName"] = user.FirstName;
@@ -83,12 +85,13 @@ namespace WinAuthAndAzureAuthTestForURCS.Utils
             return HttpContext.Current.Session["firstName"] + " " + HttpContext.Current.Session["lastName"];
         }
 
-        public void SetUserIdentityForOAuth(UserAccount user)
+        public static void AddCurrentUserToRoles(UserAccount user)
         {
 
             foreach (UserProjectRole projRole in user.UserProjectRoles)
             {
                 //something something = projRole.Role.RoleName;
+                Roles.AddUserToRole(user.UserName, projRole.Role.RoleName);
             }
         }
     }
