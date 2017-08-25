@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
+using WinAuthAndAzureAuthTestForURCS.Utils;
 
 namespace WinAuthAndAzureAuthTestForURCS.Controllers
 {
@@ -13,22 +15,15 @@ namespace WinAuthAndAzureAuthTestForURCS.Controllers
     {
         public ActionResult Index()
         {
+            if (Request.IsAuthenticated)
+            {
+                //if I have user ID then I don't need to set session vars
+                if (Session["userID"] == null)
+                    URCSHelpers.setUserSession();
+            }
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
         /// <summary>
         /// Send an OpenID Connect sign-in request.
         /// Alternatively, you can just decorate the SignIn method with the [Authorize] attribute

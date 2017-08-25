@@ -1,9 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using System.Configuration;
+@using WinAuthAndAzureAuthTestForURCS.Utils;
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Auth Test for URCS</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -20,8 +23,26 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        if (HttpContext.Current.User.IsInRole("Site Admin"))
+                        {
+                            <li class="dropdown">
+                                <a href="#Nav" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="False">Admin <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>@Html.ActionLink("User Accounts", "Index", "UserAccount")</li>
+                                </ul>
+
+                            </li>
+                        }
+                    }
+                    <li>@Html.ActionLink("Log In", "Index", "Home")</li>
                 </ul>
+                <p class="nav navbar-text navbar-right">Hello, @URCSHelpers.GetFirstAndLastNameForCurrentUser()</p>
+                <p class="nav navbar-text navbar-right"></p>
+                <p class="nav navbar-text navbar-right"></p>
+                <p class="nav navbar-text navbar-right" style="color:#999">AUTH TEST</p>
             </div>
         </div>
     </div>

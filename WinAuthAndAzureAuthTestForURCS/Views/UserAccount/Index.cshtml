@@ -1,0 +1,73 @@
+﻿@model IEnumerable<WinAuthAndAzureAuthTestForURCS.Models.UserAccount>
+
+@{
+    ViewBag.Title = "Manage User Accounts";
+}
+
+<h2>Manage User Accounts</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn-sm btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            Roles
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Locked)
+        </th>
+        
+    </tr>
+
+   @{ var list = Model.OrderBy(item => item.LastName).ToList();}
+   @foreach (var currentuser in list)
+   { 
+     <tr>
+         <td style="width: 21px;">
+             @Html.ActionLink(" ", "Edit", new { id = currentuser.UserAccountID }, new { @class = "glyphicon glyphicon-pencil", @title = "Edit", @style = "font-size: 18px;" })
+         </td>
+        <td>
+            @Html.DisplayFor(modelItem => currentuser.FirstName)                     
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => currentuser.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => currentuser.UserName)
+        </td>
+         <td>
+
+             @foreach (var urole in currentuser.UserProjectRoles)
+             {
+                 @urole.Role.RoleName
+                 if (urole == currentuser.UserProjectRoles.Last())
+                 {
+
+                 }
+                 else
+                 {
+                    @Html.Raw(", ");
+                 }
+
+             }
+         </td>
+
+         <td>
+             @Html.Raw(currentuser.Locked == 1 ? "Yes" : "No")
+         </td>
+        
+    </tr>
+}
+
+</table>

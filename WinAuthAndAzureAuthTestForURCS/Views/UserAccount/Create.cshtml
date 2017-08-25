@@ -1,0 +1,98 @@
+﻿@model WinAuthAndAzureAuthTestForURCS.ViewModels.UserAccountViewModel
+@{
+    ViewBag.Title = "Create User Account";
+}
+
+<div class="container-fluid">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal col-lg-6">
+            <h4>Create User Account</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.vm_UserAccount.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.vm_UserAccount.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.vm_UserAccount.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.vm_UserAccount.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.vm_UserAccount.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.vm_UserAccount.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.vm_UserAccount.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.vm_UserAccount.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.vm_UserAccount.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.vm_UserAccount.Locked, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @{var UserAccount = new List<SelectListItem> {
+                                new SelectListItem { Text = "No", Value="0" },
+                                new SelectListItem { Text = "Yes", Value="1" }
+                            };
+                    }
+                    @Html.DropDownList("vm_UserAccount.Locked", new SelectList(UserAccount, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-md-2">   Member of </div>
+                <div class="col-md-10">
+                    <table class="table" style="width: 300px">
+                        <tr>
+                            <th>
+                                Role
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+                        @for (int i = 0; i < Model.vm_RoleList.Count(); i++)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(Model => Model.vm_RoleList[i].RoleName)
+                                </td>
+                                <td>
+                                    @Html.HiddenFor(Model => Model.vm_RoleList[i].RoleID)
+                                </td>
+
+                                <td>
+                                    @Html.CheckBoxFor(Model => Model.vm_RoleList[i].IsAssigned)
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                    <br />
+                    <div class="btn-group">
+                        <a href="@Url.Action("Index")" class="btn btn-default">
+                            Back
+                        </a>
+                    </div>
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+    }
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
