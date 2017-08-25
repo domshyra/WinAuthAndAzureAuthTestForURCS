@@ -37,7 +37,6 @@ namespace WinAuthAndAzureAuthTestForURCS.Utils
                 }
                 catch
                 {
-                    HttpContext.Current.Session["userID"] = "-1";
                     HttpContext.Current.Session["firstName"] = "";
                     HttpContext.Current.Session["lastName"] = username;
                     return (Int32)HttpStatusCode.Unauthorized;
@@ -64,9 +63,6 @@ namespace WinAuthAndAzureAuthTestForURCS.Utils
                     }
                     catch
                     {
-                        HttpContext.Current.Session["userID"] = "-1";
-                        HttpContext.Current.Session["firstName"] = "";
-                        HttpContext.Current.Session["lastName"] = username;
                         return (Int32)HttpStatusCode.Unauthorized;
                     }
 
@@ -90,7 +86,7 @@ namespace WinAuthAndAzureAuthTestForURCS.Utils
 
             foreach (UserProjectRole projRole in user.UserProjectRoles)
             {
-                //something something = projRole.Role.RoleName;
+                // Code doesn't work, but we need something like it
                 Roles.AddUserToRole(user.UserName, projRole.Role.RoleName);
             }
         }
